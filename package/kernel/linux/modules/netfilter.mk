@@ -246,6 +246,7 @@ define KernelPackage/ipt-nat6
   KCONFIG:=$(KCONFIG_IPT_NAT6)
   FILES:=$(foreach mod,$(IPT_NAT6-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoLoad,43,$(notdir $(IPT_NAT6-m)))
+  $(call AddDepends/ipt,+kmod-nf-nat6)
   $(call AddDepends/ipt,+kmod-ipt-conntrack)
   $(call AddDepends/ipt,+kmod-ipt-nat)
   $(call AddDepends/ipt,+kmod-ip6tables)
@@ -736,6 +737,7 @@ define KernelPackage/nft-core
 	CONFIG_NETFILTER=y \
 	CONFIG_NETFILTER_ADVANCED=y \
 	CONFIG_NFT_COMPAT=n \
+	CONFIG_NFT_QUEUE=n \
 	CONFIG_NF_TABLES_ARP=n \
 	CONFIG_NF_TABLES_BRIDGE=n \
 	$(KCONFIG_NFT_CORE)
